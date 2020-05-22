@@ -7,10 +7,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<BorderPane fx:controller="com.tictactoe.Controller" stylesheets="/com/tictactoe/gameGrid.css" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:controller="com.tictactoe.Controller" stylesheets="/com/tictactoe/gameGrid.css"
+            xmlns:fx="http://javafx.com/fxml">
     <top>
         <MenuBar>
             <Menu text="Game" mnemonicParsing="false">
@@ -28,25 +26,26 @@
         </MenuBar>
     </top>
     <center>
-        <GridPane>
-            <Button mnemonicParsing="false" fx:id="gridButton00" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="gridButton"
+        <GridPane fx:id="buttonsGrid">
+            <Button mnemonicParsing="false" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton01"  GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton02"  GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton10"  GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton11"  GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton12"  GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton20"  GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton21"  GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="grid-button"
                     onAction="#gridClick"/>
-            <Button mnemonicParsing="false" fx:id="gridButton22"  GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="gridButton"
+            <Button mnemonicParsing="false" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="grid-button"
                     onAction="#gridClick"/>
+            <!--         todo:   check mnemonicParsing and add keyboard shortcuts -->
         </GridPane>
     </center>
 </BorderPane>

@@ -1,25 +1,9 @@
-.gridButton {
+.grid-button {
     -fx-pref-height: 150;
     -fx-pref-width: 150;
 }
 
-.gridButtonPlayer1{
-    -fx-pref-height: 150;
-    -fx-pref-width: 150;
-    -fx-image: url("x.png");
-}
-.gridButtonPlayer2{
-    -fx-pref-height: 150;
-    -fx-pref-width: 150;
-    -fx-image: url("circle.png");
-}
-.gridButtonPlayerComputer{
-    -fx-pref-height: 150;
-    -fx-pref-width: 150;
-    -fx-image: url("circle.png");
-}
-
-
+/*todo: add css*/
 .menu-bar{
 
 }
