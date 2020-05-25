@@ -1,9 +1,14 @@
 .grid-button {
     -fx-pref-height: 150;
     -fx-pref-width: 150;
+    -fx-max-width: 100000000;/*todo: change this with a good alternate*/
+    -fx-max-height: 100000000;
+}
+
+#buttonsGrid {
 }
 
 /*todo: add css*/
-.menu-bar{
+.menu-bar {
 
 }

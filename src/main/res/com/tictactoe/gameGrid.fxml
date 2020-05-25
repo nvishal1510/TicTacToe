@@ -27,6 +27,17 @@
     </top>
     <center>
         <GridPane fx:id="buttonsGrid">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <!--    todo: try setting this in css   -->
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
             <Button mnemonicParsing="false" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="grid-button"
                     onAction="#gridClick"/>
             <Button mnemonicParsing="false" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="grid-button"
