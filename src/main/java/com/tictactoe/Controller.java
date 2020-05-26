@@ -41,14 +41,15 @@ public class Controller
     {
         if (!grid.isfull() && grid.checkWin() == Player.NONE)
         {
+            Button buttonClicked = (Button) actionEvent.getSource();
             //box row where button is clicked
-            int row = GridPane.getRowIndex((Node) actionEvent.getSource());
+            int row = GridPane.getRowIndex(buttonClicked);
             //box column where button is clicked
-            int column = GridPane.getColumnIndex((Node) actionEvent.getSource());
+            int column = GridPane.getColumnIndex(buttonClicked);
 
             if (grid.markGrid(row, column, playerPlaying))
             {
-                markBox(row,column);
+                markBox(buttonClicked);
 
                 playerPlaying = (playerPlaying == Player.PLAYER1) ? Player.PLAYER2 : Player.PLAYER1;
                 if (grid.checkWin() != Player.NONE)
@@ -76,9 +77,18 @@ public class Controller
         }
     }
 
-    private void markBox (int row, int column)
+    private void markBox (Button buttonClicked)
     {
-
+        if (playerPlaying == Player.PLAYER1)
+        {
+            buttonClicked.setText("X");
+            buttonClicked.setFont(Font.font("Comic Sans MS",60));
+        }
+        else
+        {
+            buttonClicked.setText("O");
+            buttonClicked.setFont(Font.font("Ebrima",60));
+        }
     }
 
 
