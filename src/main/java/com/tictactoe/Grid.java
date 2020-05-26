@@ -2,7 +2,7 @@ package com.tictactoe;
 
 public class Grid
 {
-    private Player[][] mGrid;
+    private final Player[][] mGrid;
 
     /**
      * initializes the grid with Player.NONE
@@ -41,7 +41,7 @@ public class Grid
         return true;
     }
 
-    private Player getGridElement (int row, int column)
+    public Player getGridElement (int row, int column)
     {
         return mGrid[row][column];
     }

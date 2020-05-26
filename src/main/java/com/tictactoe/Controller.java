@@ -1,29 +1,32 @@
 package com.tictactoe;
 
+import com.sun.glass.ui.Pixels;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
-import java.util.Stack;
+import java.text.Format;
 
 public class Controller
 {
     //grid to store players marking
-    private Grid grid;
+    private final Grid grid;
 
     //This represents the player whose who is currently playing
     private Player playerPlaying;
 
     @FXML
     private GridPane buttonsGrid;
-
-    @FXML
-    private StackPane stackPane00;
 
 
     public Controller ()
@@ -55,19 +58,28 @@ public class Controller
                 if (grid.checkWin() != Player.NONE)
                 {
                     System.out.println(grid.checkWin() + " won");
-                    //todo: alert box showing player won
+                    Notifications.create().hideAfter(Duration.seconds(2))
+                            .text( String.format("Congratulations %s you have won",grid.checkWin()))
+                            .owner(buttonsGrid)
+                            .show();
                 }
                 else if (grid.isfull())
                 {
                     System.out.println("draw");
-                    //todo declare draw
+                    Notifications.create().hideAfter(Duration.seconds(2))
+                            .text( "The game is ended in a draw")
+                            .owner(buttonsGrid)
+                            .show();
                 }
 
             }
             else
             {
                 System.out.println("already marked");
-                //todo : show a toast saying this grid is already marked
+                Notifications.create().hideAfter(Duration.seconds(1))
+                        .text(String.format("This grid is already marked by %s",grid.getGridElement(row,column)))
+                        .owner(buttonsGrid)
+                        .show();
             }
         }
         else
@@ -90,6 +102,7 @@ public class Controller
             buttonClicked.setFont(Font.font("Ebrima",60));
         }
     }
+
 
 
     private void print (String message)
