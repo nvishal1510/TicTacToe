@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+
+import java.util.Stack;
 
 public class Controller
 {
@@ -18,6 +21,9 @@ public class Controller
 
     @FXML
     private GridPane buttonsGrid;
+
+    @FXML
+    private StackPane stackPane00;
 
 
     public Controller ()
@@ -42,17 +48,7 @@ public class Controller
 
             if (grid.markGrid(row, column, playerPlaying))
             {
-                //set mark on the Button
-                Image mark;
-                if (playerPlaying == Player.PLAYER1)
-                    mark = new Image(getClass().getResourceAsStream("x.png"));
-                else
-                    mark = new Image(getClass().getResourceAsStream("circle.png"));
-                Button buttonClicked = (Button) actionEvent.getSource();
-                ImageView imageView = new ImageView(mark);
-                imageView.setFitHeight(buttonClicked.getHeight());  // todo: check this method for errors
-                imageView.setFitWidth(buttonClicked.getWidth());
-                buttonClicked.setGraphic(imageView);
+                markBox(row,column);
 
                 playerPlaying = (playerPlaying == Player.PLAYER1) ? Player.PLAYER2 : Player.PLAYER1;
                 if (grid.checkWin() != Player.NONE)
@@ -73,10 +69,16 @@ public class Controller
                 //todo : show a toast saying this grid is already marked
             }
         }
-        else {
+        else
+        {
             //todo:say game has ended to the user
             System.out.println("The game has ended");
         }
+    }
+
+    private void markBox (int row, int column)
+    {
+
     }
 
 

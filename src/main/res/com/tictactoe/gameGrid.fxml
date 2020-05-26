@@ -7,6 +7,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane fx:controller="com.tictactoe.Controller" stylesheets="/com/tictactoe/gameGrid.css"
             xmlns:fx="http://javafx.com/fxml">
     <top>
@@ -56,6 +61,7 @@
                     onAction="#gridClick"/>
             <Button mnemonicParsing="false" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="grid-button"
                     onAction="#gridClick"/>
+
             <!--         todo:   check mnemonicParsing and add keyboard shortcuts -->
         </GridPane>
     </center>
