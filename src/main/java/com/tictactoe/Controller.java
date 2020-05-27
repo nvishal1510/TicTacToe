@@ -58,16 +58,18 @@ public class Controller
                 if (grid.checkWin() != Player.NONE)
                 {
                     System.out.println(grid.checkWin() + " won");
-                    Notifications.create().hideAfter(Duration.seconds(2))
-                            .text( String.format("Congratulations %s you have won",grid.checkWin()))
+                    Notifications.create()
+                            .hideAfter(Duration.seconds(2))
+                            .text(String.format("Congratulations %s you have won!", grid.checkWin()))
                             .owner(buttonsGrid)
                             .show();
                 }
                 else if (grid.isfull())
                 {
                     System.out.println("draw");
-                    Notifications.create().hideAfter(Duration.seconds(2))
-                            .text( "The game is ended in a draw")
+                    Notifications.create()
+                            .hideAfter(Duration.seconds(2))
+                            .text("The game ended in a draw!")
                             .owner(buttonsGrid)
                             .show();
                 }
@@ -76,16 +78,21 @@ public class Controller
             else
             {
                 System.out.println("already marked");
-                Notifications.create().hideAfter(Duration.seconds(1))
-                        .text(String.format("This grid is already marked by %s",grid.getGridElement(row,column)))
+                Notifications.create()
+                        .hideAfter(Duration.seconds(1))
+                        .text(String.format("This grid is already marked by %s!", grid.getGridElement(row, column)))
                         .owner(buttonsGrid)
                         .show();
             }
         }
         else
         {
-            //todo:say game has ended to the user
-            System.out.println("The game has ended");
+            System.out.println("The game has already ended");
+            Notifications.create()
+                    .hideAfter(Duration.seconds(2))
+                    .text(String.format("The game has already ended!\nThe game is won by %s!", grid.checkWin()))
+                    .owner(buttonsGrid)
+                    .show();
         }
     }
 
@@ -94,15 +101,14 @@ public class Controller
         if (playerPlaying == Player.PLAYER1)
         {
             buttonClicked.setText("X");
-            buttonClicked.setFont(Font.font("Comic Sans MS",60));
+            buttonClicked.setFont(Font.font("Comic Sans MS", 60));
         }
         else
         {
             buttonClicked.setText("O");
-            buttonClicked.setFont(Font.font("Ebrima",60));
+            buttonClicked.setFont(Font.font("Ebrima", 60));
         }
     }
-
 
 
     private void print (String message)

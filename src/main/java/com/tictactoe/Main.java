@@ -12,7 +12,7 @@ public class Main extends Application
     public void start (Stage primaryStage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("gameGrid.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

@@ -57,7 +57,7 @@ public class Grid
         //checks rows
         for (int row = 0; row < 3; row++)
             if (getGridElement(row, 0) == getGridElement(row, 1) &&
-                    getGridElement(row, 0) == getGridElement(row, 1) &&
+                    getGridElement(row, 1) == getGridElement(row, 2) &&
                     getGridElement(row, 0) != Player.NONE)
                 return getGridElement(row, 0);
 
