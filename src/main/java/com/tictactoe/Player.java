@@ -10,6 +10,7 @@ public enum Player
                     return "Computer";
                 }
             },
+
     NONE
             {
                 @Override
@@ -18,6 +19,7 @@ public enum Player
                     return "None";
                 }
             },
+
     PLAYER1
             {
                 @Override
@@ -26,6 +28,7 @@ public enum Player
                     return "Player 1";
                 }
             },
+
     PLAYER2
             {
                 @Override

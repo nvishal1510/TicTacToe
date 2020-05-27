@@ -1,21 +1,12 @@
 package com.tictactoe;
 
-import com.sun.glass.ui.Pixels;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
-
-import java.text.Format;
 
 public class Controller
 {
@@ -29,6 +20,10 @@ public class Controller
     private GridPane buttonsGrid;
 
 
+    /**
+     * Initialise grid using Grid()
+     * and playerPlaying to Player.PLAYER1
+     */
     public Controller ()
     {
         grid = new Grid();
@@ -45,57 +40,53 @@ public class Controller
         if (!grid.isfull() && grid.checkWin() == Player.NONE)
         {
             Button buttonClicked = (Button) actionEvent.getSource();
-            //box row where button is clicked
+
             int row = GridPane.getRowIndex(buttonClicked);
-            //box column where button is clicked
             int column = GridPane.getColumnIndex(buttonClicked);
 
             if (grid.markGrid(row, column, playerPlaying))
             {
+                //mark the box on the visible GUI
                 markBox(buttonClicked);
 
                 playerPlaying = (playerPlaying == Player.PLAYER1) ? Player.PLAYER2 : Player.PLAYER1;
                 if (grid.checkWin() != Player.NONE)
                 {
                     System.out.println(grid.checkWin() + " won");
-                    Notifications.create()
-                            .hideAfter(Duration.seconds(2))
-                            .text(String.format("Congratulations %s you have won!", grid.checkWin()))
-                            .owner(buttonsGrid)
-                            .show();
+                    showNotification(2, String.format("Congratulations %s you have won!", grid.checkWin()));
                 }
                 else if (grid.isfull())
                 {
-                    System.out.println("draw");
-                    Notifications.create()
-                            .hideAfter(Duration.seconds(2))
-                            .text("The game ended in a draw!")
-                            .owner(buttonsGrid)
-                            .show();
+                    showNotification(2,"The game ended in a draw!");
                 }
 
             }
             else
             {
                 System.out.println("already marked");
-                Notifications.create()
-                        .hideAfter(Duration.seconds(1))
-                        .text(String.format("This grid is already marked by %s!", grid.getGridElement(row, column)))
-                        .owner(buttonsGrid)
-                        .show();
+                showNotification(1, String.format("This grid is already marked by %s!", grid.getGridElement(row, column)));
             }
         }
         else
         {
             System.out.println("The game has already ended");
-            Notifications.create()
-                    .hideAfter(Duration.seconds(2))
-                    .text(String.format("The game has already ended!\nThe game is won by %s!", grid.checkWin()))
-                    .owner(buttonsGrid)
-                    .show();
+            showNotification(2, String.format("The game has already ended!\nThe game is won by %s!", grid.checkWin()));
         }
     }
 
+    private void showNotification (int time, String message)
+    {
+        Notifications.create()
+                .hideAfter(Duration.seconds(time))
+                .text(message)
+                .owner(buttonsGrid)
+                .show();
+    }
+
+    /**
+     * if {@code playerPlaying == Player.PLAYER1} change the text on the button clicked to X <br>
+     * else if {@code playerPlaying == Player.PLAYER2} change the text on the button clicked to O
+     */
     private void markBox (Button buttonClicked)
     {
         if (playerPlaying == Player.PLAYER1)

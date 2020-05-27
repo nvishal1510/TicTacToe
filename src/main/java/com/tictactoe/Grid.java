@@ -5,7 +5,7 @@ public class Grid
     private final Player[][] mGrid;
 
     /**
-     * initializes the grid with Player.NONE
+     * initializes the all the elements of grid with Player.NONE
      */
     public Grid ()
     {
@@ -26,9 +26,7 @@ public class Grid
     /**
      * Marks the grid at the specified box row and column with the specified player
      *
-     * @param row
-     * @param column
-     * @param player
+     * @param player Player to mark the grid with
      * @return true - if successfully marked<br>
      * false - if it is already marked
      * @throws ArrayIndexOutOfBoundsException when row or column is not in range(0,3)
@@ -41,6 +39,11 @@ public class Grid
         return true;
     }
 
+    /**
+     * Getter method for different elements of grid
+     *
+     * @return the element in grid at the row and column
+     */
     public Player getGridElement (int row, int column)
     {
         return mGrid[row][column];
@@ -96,5 +99,15 @@ public class Grid
                     return false;
 
         return true;
+    }
+
+    /**
+     * Assigns Player.NONE to all the elements of the Grid
+     */
+    public void clear()
+    {
+        for (int row = 0; row < 3; row++)
+            for (int column = 0; column < 3; column++)
+                mGrid[row][column] = Player.NONE;
     }
 }
