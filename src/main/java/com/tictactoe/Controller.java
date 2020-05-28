@@ -62,10 +62,8 @@ public class Controller
 
             }
             else
-            {
-                System.out.println("already marked");
-                showNotification(1, String.format("This grid is already marked by %s!", grid.getGridElement(row, column)));
-            }
+                showNotification(1, String.format("This grid is already marked by %s!",
+                        grid.getGridElement(row, column).getPlayer()));
         }
         else
         {
