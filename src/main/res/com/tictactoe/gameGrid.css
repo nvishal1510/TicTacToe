@@ -1,14 +1,40 @@
 .grid-button {
-    -fx-pref-height: 150;
-    -fx-pref-width: 150;
-    -fx-max-width: 100000000;/*todo: change this with a good alternate*/
-    -fx-max-height: 100000000;
+    -fx-pref-height: 150px;
+    -fx-pref-width: 150px;
+    -fx-max-width: 100000000px;/*todo: change this with a good alternate*/
+    -fx-max-height: 100000000px;
 }
 
 #buttonsGrid {
 }
 
-/*todo: add css*/
 .menu-bar {
+    -fx-padding: 0px;
+    -fx-border-insets: 0px;
+}
+
+/*the menu which which is currently showing its items*/
+.menu-button:showing{
+    -fx-background-color:#4285f4;
+}
+.menu:hover{
+    -fx-background-color:#4285f4;
+}
+
+.menu{
+    -fx-padding: 5 5 5 5;
+}
+
+
+/*menu items*/
+.menu-item{
+    -fx-background-color:#ececec;
+    -fx-pref-width: 100px
+}
+.menu-item:hover{
+    -fx-background-color:#4285f4;
+}
+.menu-item:focused{
+    -fx-background-color:#4285f4;
 
 }

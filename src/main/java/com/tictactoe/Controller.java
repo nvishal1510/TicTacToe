@@ -2,6 +2,7 @@ package com.tictactoe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -138,4 +139,8 @@ public class Controller
     }
 
 
+    public void showAbout (ActionEvent actionEvent)
+    {
+        //todo: add a about page
+    }
 }

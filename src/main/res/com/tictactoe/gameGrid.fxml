@@ -28,6 +28,7 @@
                 <MenuItem text="Undo" mnemonicParsing="false" onAction="#undoChange"/>
                 <MenuItem text="Redo" mnemonicParsing="false" onAction="#redoChange"/>
             </Menu>
+            <Menu text="About" onAction="#showAbout" mnemonicParsing="false"/>
         </MenuBar>
     </top>
     <center>
