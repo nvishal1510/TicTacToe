@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane fx:controller="com.tictactoe.Controller" stylesheets="/com/tictactoe/gameGrid.css"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <MenuBar>
-            <Menu text="Game" mnemonicParsing="false">
-                <Menu text="New" mnemonicParsing="false">
-                    <MenuItem text="1 Player" onAction="#new1PlayerGame" mnemonicParsing="false"/>
-                    <MenuItem text=" Player" onAction="#new2PlayerGame" mnemonicParsing="false"/>
-                </Menu>
-                <MenuItem text="Open" mnemonicParsing="false" onAction="#openGame"/>
-                <MenuItem text="Save" mnemonicParsing="false" onAction="#saveGame"/>
+            <Menu text="New" mnemonicParsing="false">
+                <MenuItem text="1 Player" onAction="#new1PlayerGame" mnemonicParsing="false"/>
+                <MenuItem text="2 Player" onAction="#new2PlayerGame" mnemonicParsing="false"/>
             </Menu>
             <Menu text="Changes" mnemonicParsing="false">
                 <MenuItem text="Undo" mnemonicParsing="false" onAction="#undoChange"/>
@@ -37,7 +23,6 @@
                 <ColumnConstraints hgrow="ALWAYS"/>
                 <ColumnConstraints hgrow="ALWAYS"/>
                 <ColumnConstraints hgrow="ALWAYS"/>
-                <!--    todo: try setting this in css   -->
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="ALWAYS"/>

@@ -2,7 +2,6 @@ package com.tictactoe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -61,10 +60,7 @@ public class Controller
                     showNotification(2, String.format("Congratulations %s you have won!", grid.checkWin()));
                 }
                 else if (grid.isfull())
-                {
                     showNotification(2, "The game ended in a draw!");
-                }
-
             }
             else
                 showNotification(1, String.format("This grid is already marked by %s!",
@@ -87,6 +83,7 @@ public class Controller
     }
 
     /**
+     * Used by gridClick to simplify the code
      * if {@code playerPlaying == Player.PLAYER1} change the text on the button clicked to X <br>
      * else if {@code playerPlaying == Player.PLAYER2} change the text on the button clicked to O
      */
@@ -116,13 +113,24 @@ public class Controller
         print("New 1 player game");
     }
 
+    /**
+     * Start a new 2 Player game<br>
+     * This is called by button in menu in GUI
+     */
     @FXML
     private void new2PlayerGame (ActionEvent actionEvent)
     {
         print("New 2 player game");
+        unmarkBox();
+        grid.clear();
+        playerPlaying = Player.PLAYER1;
     }
 
-    public void openGame (ActionEvent actionEvent)
+    /**
+     * Removes all the text on the GUI
+     * It restores the initial state of the visible grid
+     */
+    private void unmarkBox ()
     {
         print("open game");
     }
