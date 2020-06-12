@@ -11,10 +11,14 @@ import org.controlsfx.control.Notifications;
 
 public class Controller
 {
-    //grid to store players marking
+    /**
+     * grid to store players marking
+     */
     private final Grid grid;
 
-    //This represents the player whose who is currently playing
+    /**
+     * This represents the player whose who is currently playing
+     */
     private Player playerPlaying;
 
     @FXML
@@ -58,7 +62,7 @@ public class Controller
                 }
                 else if (grid.isfull())
                 {
-                    showNotification(2,"The game ended in a draw!");
+                    showNotification(2, "The game ended in a draw!");
                 }
 
             }

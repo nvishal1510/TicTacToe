@@ -3,7 +3,6 @@ package com.tictactoe;
 public class Grid
 {
     private final Move[][] mGrid;
-    private int moveToBePlayed;
 
     /**
      * initializes the all the elements of grid with Player.NONE
@@ -14,9 +13,7 @@ public class Grid
         //initialise grid
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
-                mGrid[i][j] = new Move(Player.NONE, 0);
-
-        moveToBePlayed = 1;
+                mGrid[i][j] = new Move(Player.NONE);
     }
 
     /**
@@ -24,7 +21,7 @@ public class Grid
      */
     private void setGridElement (int row, int column, Player player)
     {
-        mGrid[row][column] = new Move(player, moveToBePlayed);
+        mGrid[row][column] = new Move(player);
     }
 
     /**
@@ -51,7 +48,6 @@ public class Grid
         if (getGridElement(row, column).getPlayer() != Player.NONE)
             return false;
         setGridElement(row, column, player);
-        moveToBePlayed++;
         return true;
     }
 
@@ -115,7 +111,8 @@ public class Grid
         for (int row = 0; row < 3; row++)
             for (int column = 0; column < 3; column++)
                 mGrid[row][column] = new Move();
-        moveToBePlayed = 1;
+        Move.clear();
+
     }
 
 }

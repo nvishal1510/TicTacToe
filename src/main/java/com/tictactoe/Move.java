@@ -1,38 +1,44 @@
 package com.tictactoe;
 
+import java.util.Stack;
+
 public class Move
 {
-    private Player player;
-    private int moveNum;
+    /**
+     * This stores the moves played by the Players
+     */
+    private static final Stack<Move> playedMoveStack = new Stack<>();
+    private final Player player;
 
-    public Move (Player player, int moveNum)
+    public Move (Player player)
     {
         this.player = player;
-        this.moveNum = moveNum;
+        if (player == Player.NONE)
+        {
+            playedMoveStack.push(this);
+        }
     }
 
     public Move ()
     {
-        this(Player.NONE,0);
+        this(Player.NONE);
+    }
+
+    public static int getPlayedMoveStackSize ()
+    {
+        return playedMoveStack.size();
+    }
+
+    /**
+     * Clear all the records of moves played with Move.java
+     */
+    public static void clear ()
+    {
+        playedMoveStack.clear();
     }
 
     public Player getPlayer ()
     {
         return player;
-    }
-
-    public void setPlayer (Player player)
-    {
-        this.player = player;
-    }
-
-    public int getMoveNum ()
-    {
-        return moveNum;
-    }
-
-    public void setMoveNum (int moveNum)
-    {
-        this.moveNum = moveNum;
     }
 }
