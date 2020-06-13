@@ -10,10 +10,9 @@ public class Grid
     public Grid ()
     {
         mGrid = new Move[3][3];
-        //initialise grid
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++)
-                mGrid[i][j] = new Move(Player.NONE);
+        for (int row = 0; row < 3; row++)
+            for (int column = 0; column < 3; column++)
+                mGrid[row][column] = new Move(Player.NONE, row, column);
     }
 
     /**
@@ -21,7 +20,7 @@ public class Grid
      */
     private void setGridElement (int row, int column, Player player)
     {
-        mGrid[row][column] = new Move(player);
+        mGrid[row][column] = new Move(player, row, column);
     }
 
     /**
@@ -92,7 +91,7 @@ public class Grid
      * @return true if all the boxes are marked<br>
      * false if at least one box is not marked
      */
-    public boolean isfull ()
+    public boolean isFull ()
     {
         for (int row = 0; row < 3; row++)
             for (int column = 0; column < 3; column++)
@@ -110,7 +109,7 @@ public class Grid
     {
         for (int row = 0; row < 3; row++)
             for (int column = 0; column < 3; column++)
-                mGrid[row][column] = new Move();
+                mGrid[row][column] = new Move(row, column);
         Move.clear();
 
     }

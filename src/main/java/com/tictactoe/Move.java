@@ -9,19 +9,23 @@ public class Move
      */
     private static final Stack<Move> playedMoveStack = new Stack<>();
     private final Player player;
+    private final int row;
+    private final int column;
 
-    public Move (Player player)
+    public Move (Player player, int row, int column)
     {
         this.player = player;
-        if (player == Player.NONE)
+        this.row = row;
+        this.column = column;
+        if (player != Player.NONE)
         {
             playedMoveStack.push(this);
         }
     }
 
-    public Move ()
+    public Move (int row, int column)
     {
-        this(Player.NONE);
+        this(Player.NONE, row, column);
     }
 
     public static int getPlayedMoveStackSize ()
@@ -35,6 +39,16 @@ public class Move
     public static void clear ()
     {
         playedMoveStack.clear();
+    }
+
+    public int getRow ()
+    {
+        return row;
+    }
+
+    public int getColumn ()
+    {
+        return column;
     }
 
     public Player getPlayer ()

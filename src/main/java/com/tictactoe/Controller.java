@@ -2,6 +2,7 @@ package com.tictactoe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -41,7 +42,7 @@ public class Controller
     @FXML
     private void gridClick (ActionEvent actionEvent)
     {
-        if (!grid.isfull() && grid.checkWin() == Player.NONE)
+        if (!grid.isFull() && grid.checkWin() == Player.NONE)
         {
             Button buttonClicked = (Button) actionEvent.getSource();
 
@@ -59,7 +60,7 @@ public class Controller
                     System.out.println(grid.checkWin() + " won");
                     showNotification(2, String.format("Congratulations %s you have won!", grid.checkWin()));
                 }
-                else if (grid.isfull())
+                else if (grid.isFull())
                     showNotification(2, "The game ended in a draw!");
             }
             else
@@ -132,7 +133,11 @@ public class Controller
      */
     private void unmarkBox ()
     {
-        print("open game");
+        for (Node node : buttonsGrid.getChildren())
+        {
+            Button button = (Button) node;
+            button.setText("");
+        }
     }
 
     public void saveGame (ActionEvent actionEvent)
