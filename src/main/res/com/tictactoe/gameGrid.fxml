@@ -14,7 +14,12 @@
                 <MenuItem text="Undo" mnemonicParsing="false" onAction="#undoChange"/>
                 <MenuItem text="Redo" mnemonicParsing="false" onAction="#redoChange"/>
             </Menu>
-            <Menu text="About" onAction="#showAbout" mnemonicParsing="false"/>
+            <Menu  mnemonicParsing="false">
+<!--                this is to execute function when when clicked       -->
+                <graphic>
+                    <Label text="About" onMouseClicked="#showAbout"/>
+                </graphic>
+            </Menu>
         </MenuBar>
     </top>
     <center>

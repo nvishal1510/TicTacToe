@@ -6,7 +6,10 @@ import com.tictactoe.model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -199,9 +202,17 @@ public class Controller
         throw new NoSuchElementException("The button marked was not found");
     }
 
-
-    public void showAbout (ActionEvent actionEvent)
+    @FXML
+    private void showAbout (MouseEvent actionEvent)
     {
-        //todo: add a about page
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText(null);
+        alert.setContentText("Developed by Vishal Neeli\n" +
+                "Github:\n" +
+                "https://github.com/nvishal1510\n" +
+                "Facebook:\n" +
+                "https://www.facebook.com/nvishal9");
+        alert.show();
     }
 }
