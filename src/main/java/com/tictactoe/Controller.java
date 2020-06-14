@@ -47,15 +47,21 @@ public class Controller
     private void gridClick (ActionEvent actionEvent)
     {
         if (grid.isFull() || grid.checkWin() != Player.NONE)
+        {
             showNotification(2, String.format("The game has already ended!\nThe game is won by %s!", grid.checkWin()));
+            return;
+        }
 
         Button buttonClicked = (Button) actionEvent.getSource();
         int row = GridPane.getRowIndex(buttonClicked);
         int column = GridPane.getColumnIndex(buttonClicked);
 
         if (!grid.markGrid(row, column, playerPlaying))
+        {
             showNotification(1, String.format("This grid is already marked by %s!",
                     grid.getGridElement(row, column).getPlayer()));
+            return;
+        }
 
         markBox(buttonClicked);
 
