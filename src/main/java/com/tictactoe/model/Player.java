@@ -2,41 +2,19 @@ package com.tictactoe.model;
 
 public enum Player
 {
-    COMPUTER
-            {
-                @Override
-                public String toString ()
-                {
-                    return "Computer";
-                }
-            },
+    COMPUTER("Computer"), NONE("None"), PLAYER1("Player 1"), PLAYER2("Player 2");
 
-    NONE
-            {
-                @Override
-                public String toString ()
-                {
-                    return "None";
-                }
-            },
+    private final String friendlyName;
 
-    PLAYER1
-            {
-                @Override
-                public String toString ()
-                {
-                    return "Player 1";
-                }
-            },
+    Player (String friendlyName)
+    {
+        this.friendlyName = friendlyName;
+    }
 
-    PLAYER2
-            {
-                @Override
-                public String toString ()
-                {
-                    return "Player 2";
-                }
-            }
-
+    @Override
+    public String toString ()
+    {
+        return friendlyName;
+    }
 
 }

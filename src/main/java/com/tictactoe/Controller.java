@@ -110,16 +110,10 @@ public class Controller
         }
     }
 
-
-    private void print (String message)
-    {
-        System.out.println(message);
-    }
-
     @FXML
     private void new1PlayerGame (ActionEvent actionEvent)
     {
-        print("New 1 player game");
+        System.out.println("New 1 player game");
     }
 
     /**
@@ -150,7 +144,8 @@ public class Controller
     /**
      * This function is called by the click of the undo in GUI
      */
-    public void undoChange (ActionEvent actionEvent)
+    @FXML
+    private void undoChange (ActionEvent actionEvent)
     {
         Move lastMove;
         try
@@ -183,7 +178,7 @@ public class Controller
 
     public void redoChange (ActionEvent actionEvent)
     {
-        print("Redo");
+        System.out.println("Redo");
     }
 
 
