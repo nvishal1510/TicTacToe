@@ -1,5 +1,6 @@
 package com.tictactoe.model;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Move
@@ -46,9 +47,15 @@ public class Move
      *
      * @return last played move
      */
-    static Move undoLastMove ()
+    static Move undoLastMove () throws UnsupportedOperationException
     {
-        return playedMoveStack.pop();
+        try
+        {
+            return playedMoveStack.pop();
+        } catch (EmptyStackException e)
+        {
+            throw new UnsupportedOperationException("There are no moves to undo", e);
+        }
     }
 
     /**
