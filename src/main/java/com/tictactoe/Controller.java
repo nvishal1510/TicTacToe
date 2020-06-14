@@ -31,8 +31,7 @@ public class Controller
 
 
     /**
-     * Initialise grid using Grid()
-     * and playerPlaying to Player.PLAYER1
+     * Initialise grid using Grid() and playerPlaying to Player.PLAYER1
      */
     public Controller ()
     {
