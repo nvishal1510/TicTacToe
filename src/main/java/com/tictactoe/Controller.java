@@ -63,7 +63,7 @@ public class Controller
             return;
         }
 
-        markBox(buttonClicked);
+        markBox(buttonClicked, playerPlaying);
 
         swapPlayerPlaying();
 
@@ -101,17 +101,19 @@ public class Controller
      * if {@code playerPlaying == Player.PLAYER1} change the text on the button clicked to X <br>
      * else if {@code playerPlaying == Player.PLAYER2} change the text on the button clicked to O
      */
-    private void markBox (Button buttonClicked)
+    private void markBox (Button buttonClicked, Player player)
     {
-        if (playerPlaying == Player.PLAYER1)
+        switch (player)
         {
-            buttonClicked.setText("X");
-            buttonClicked.setFont(Font.font("Comic Sans MS", 60));
-        }
-        else
-        {
-            buttonClicked.setText("O");
-            buttonClicked.setFont(Font.font("Ebrima", 60));
+            case PLAYER1 -> {
+                buttonClicked.setText("X");
+                buttonClicked.setFont(Font.font("Comic Sans MS", 60));
+            }
+            case PLAYER2 -> {
+                buttonClicked.setText("O");
+                buttonClicked.setFont(Font.font("Ebrima", 60));
+            }
+            case NONE -> buttonClicked.setText("");
         }
     }
 
@@ -152,12 +154,28 @@ public class Controller
     @FXML
     private void undoChange (ActionEvent actionEvent)
     {
-        Move lastMove;
         try
         {
-            lastMove = grid.undoLastMove();
+            Move lastMove = grid.undoMove();
             swapPlayerPlaying();
-            getButtonFromButtonsGrid(lastMove.getRow(), lastMove.getColumn()).setText("");
+            markBox(getButtonFromButtonsGrid(lastMove.getRow(), lastMove.getColumn()), Player.NONE);
+        } catch (UnsupportedOperationException e)
+        {
+            showNotification(2, e.getMessage());
+        }
+    }
+
+    /**
+     * This function is called by the click of the redo in GUI
+     */
+    @FXML
+    private void redoChange (ActionEvent actionEvent)
+    {
+        try
+        {
+            Move redoneMove = grid.redoMove();
+            swapPlayerPlaying();
+            markBox(getButtonFromButtonsGrid(redoneMove.getRow(), redoneMove.getColumn()), redoneMove.getPlayer());
         } catch (UnsupportedOperationException e)
         {
             showNotification(2, e.getMessage());
@@ -179,11 +197,6 @@ public class Controller
                 return (Button) node;
 
         throw new NoSuchElementException("The button marked was not found");
-    }
-
-    public void redoChange (ActionEvent actionEvent)
-    {
-        System.out.println("Redo");
     }
 
 

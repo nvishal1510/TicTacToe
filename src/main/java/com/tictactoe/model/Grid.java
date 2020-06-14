@@ -16,7 +16,9 @@ public class Grid
     }
 
     /**
-     * Setter method for Grid Element with param player and moveToBePlayed
+     * Setter method for Grid Element
+     *
+     * @param player Player to set the grid element with
      */
     private void setGridElement (int row, int column, Player player)
     {
@@ -34,8 +36,8 @@ public class Grid
     }
 
     /**
-     * Marks the grid at the specified box row and column with the specified player
-     * and also increments the moveToBePlayed
+     * Marks the grid at the specified box row and column with the specified player and clears the record of undone
+     * moves
      *
      * @param player Player to mark the grid with
      * @return true - if successfully marked<br>
@@ -47,6 +49,7 @@ public class Grid
         if (getGridElement(row, column).getPlayer() != Player.NONE)
             return false;
         setGridElement(row, column, player);
+        Move.clearUndoneMoveStack();
         return true;
     }
 
@@ -115,13 +118,26 @@ public class Grid
 
     /**
      * Undos last move i.e removes last move in grid and record that the last move was played
+     *
      * @return last Move played
      */
-    public Move undoLastMove ()
+    public Move undoMove ()
     {
-        Move lastPlayedMove = Move.undoLastMove();
+        Move lastPlayedMove = Move.undoMove();
         setGridElement(lastPlayedMove.getRow(), lastPlayedMove.getColumn(), Player.NONE);
         return lastPlayedMove;
+    }
+
+    /**
+     * Redos last move i.e adds last move in grid and record that the redone move was played
+     *
+     * @return redone Move
+     */
+    public Move redoMove ()
+    {
+        Move redoneMove = Move.redoMove();
+        setGridElement(redoneMove.getRow(), redoneMove.getColumn(), redoneMove.getPlayer());
+        return redoneMove;
     }
 
 }

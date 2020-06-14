@@ -9,6 +9,10 @@ public class Move
      * This stores the moves played by the Players
      */
     private static final Stack<Move> playedMoveStack = new Stack<>();
+    /**
+     * This stores the undone moves
+     */
+    private static final Stack<Move> undoneMoveStack = new Stack<>();
     private final Player player;
     private final int row;
     private final int column;
@@ -19,9 +23,7 @@ public class Move
         this.row = row;
         this.column = column;
         if (player != Player.NONE)
-        {
             playedMoveStack.push(this);
-        }
     }
 
     public Move (int row, int column)
@@ -40,6 +42,7 @@ public class Move
     static void clear ()
     {
         playedMoveStack.clear();
+        undoneMoveStack.clear();
     }
 
     /**
@@ -47,15 +50,43 @@ public class Move
      *
      * @return last played move
      */
-    static Move undoLastMove () throws UnsupportedOperationException
+    static Move undoMove () throws UnsupportedOperationException
     {
         try
         {
-            return playedMoveStack.pop();
+            Move lastMove = playedMoveStack.pop();
+            undoneMoveStack.push(lastMove);
+            return lastMove;
         } catch (EmptyStackException e)
         {
             throw new UnsupportedOperationException("There are no moves to undo", e);
         }
+    }
+
+    /**
+     * Redos last move, i.e replays last undone move
+     *
+     * @return redone move
+     */
+    static Move redoMove () throws UnsupportedOperationException
+    {
+        try
+        {
+            Move move = undoneMoveStack.pop();
+            playedMoveStack.push(move);
+            return move;
+        } catch (EmptyStackException e)
+        {
+            throw new UnsupportedOperationException("There are no moves to redo", e);
+        }
+    }
+
+    /**
+     * Clears record of all undone moves
+     */
+    static void clearUndoneMoveStack ()
+    {
+        undoneMoveStack.clear();
     }
 
     /**
@@ -65,6 +96,7 @@ public class Move
     {
         return row;
     }
+
     /**
      * @return column at which Move is placed
      */
