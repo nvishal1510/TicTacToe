@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.model;
 
 public class Grid
 {
@@ -111,7 +111,17 @@ public class Grid
             for (int column = 0; column < 3; column++)
                 mGrid[row][column] = new Move(row, column);
         Move.clear();
+    }
 
+    /**
+     * Undos last move i.e removes last move in grid and record that the last move was played
+     * @return last Move played
+     */
+    public Move undoLastMove ()
+    {
+        Move lastPlayedMove = Move.undoLastMove();
+        setGridElement(lastPlayedMove.getRow(), lastPlayedMove.getColumn(), Player.NONE);
+        return lastPlayedMove;
     }
 
 }

@@ -1,5 +1,8 @@
 package com.tictactoe;
 
+import com.tictactoe.model.Grid;
+import com.tictactoe.model.Move;
+import com.tictactoe.model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -8,6 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+
+import java.util.NoSuchElementException;
 
 public class Controller
 {
@@ -42,38 +47,41 @@ public class Controller
     @FXML
     private void gridClick (ActionEvent actionEvent)
     {
-        if (!grid.isFull() && grid.checkWin() == Player.NONE)
-        {
-            Button buttonClicked = (Button) actionEvent.getSource();
-
-            int row = GridPane.getRowIndex(buttonClicked);
-            int column = GridPane.getColumnIndex(buttonClicked);
-
-            if (grid.markGrid(row, column, playerPlaying))
-            {
-                //mark the box on the visible GUI
-                markBox(buttonClicked);
-
-                playerPlaying = (playerPlaying == Player.PLAYER1) ? Player.PLAYER2 : Player.PLAYER1;
-                if (grid.checkWin() != Player.NONE)
-                {
-                    System.out.println(grid.checkWin() + " won");
-                    showNotification(2, String.format("Congratulations %s you have won!", grid.checkWin()));
-                }
-                else if (grid.isFull())
-                    showNotification(2, "The game ended in a draw!");
-            }
-            else
-                showNotification(1, String.format("This grid is already marked by %s!",
-                        grid.getGridElement(row, column).getPlayer()));
-        }
-        else
-        {
-            System.out.println("The game has already ended");
+        if (grid.isFull() || grid.checkWin() != Player.NONE)
             showNotification(2, String.format("The game has already ended!\nThe game is won by %s!", grid.checkWin()));
-        }
+
+        Button buttonClicked = (Button) actionEvent.getSource();
+        int row = GridPane.getRowIndex(buttonClicked);
+        int column = GridPane.getColumnIndex(buttonClicked);
+
+        if (!grid.markGrid(row, column, playerPlaying))
+            showNotification(1, String.format("This grid is already marked by %s!",
+                    grid.getGridElement(row, column).getPlayer()));
+
+        markBox(buttonClicked);
+
+        swapPlayerPlaying();
+
+        if (grid.checkWin() != Player.NONE)
+            showNotification(2, String.format("Congratulations %s you have won!", grid.checkWin()));
+        else if (grid.isFull())
+            showNotification(2, "The game ended in a draw!");
     }
 
+    /**
+     * Swaps the value of {@link #playerPlaying} with other Player
+     */
+    private void swapPlayerPlaying ()
+    {
+        playerPlaying = (playerPlaying == Player.PLAYER1) ? Player.PLAYER2 : Player.PLAYER1;
+    }
+
+    /**
+     * Shows notifications at the right bottom of buttonGrid
+     *
+     * @param time    Duration in seconds for which notification is to be shown
+     * @param message Message to be shown when notification is shown
+     */
     private void showNotification (int time, String message)
     {
         Notifications.create()
@@ -121,8 +129,7 @@ public class Controller
     @FXML
     private void new2PlayerGame (ActionEvent actionEvent)
     {
-        print("New 2 player game");
-        unmarkBox();
+        unmarkBoxes();
         grid.clear();
         playerPlaying = Player.PLAYER1;
     }
@@ -131,7 +138,7 @@ public class Controller
      * Removes all the text on the GUI
      * It restores the initial state of the visible grid
      */
-    private void unmarkBox ()
+    private void unmarkBoxes ()
     {
         for (Node node : buttonsGrid.getChildren())
         {
@@ -140,14 +147,38 @@ public class Controller
         }
     }
 
-    public void saveGame (ActionEvent actionEvent)
-    {
-        print("Save game");
-    }
-
+    /**
+     * This function is called by the click of the undo in GUI
+     */
     public void undoChange (ActionEvent actionEvent)
     {
-        print("Undo");
+        Move lastMove;
+        try
+        {
+            lastMove = grid.undoLastMove();
+            swapPlayerPlaying();
+            getButtonFromButtonsGrid(lastMove.getRow(), lastMove.getColumn()).setText("");
+        } catch (UnsupportedOperationException e)
+        {
+            showNotification(2, e.getMessage());
+        }
+    }
+
+    /**
+     * Fetches the button in {@code GridPane buttonsGrid} using its row and column<br>
+     * This uses brute force method, i.e, compares row and column with all elements in buttonsGrid<br>
+     * Could have been made by loading all the buttons into various variable but that messes up the code
+     *
+     * @return Button in buttonsGrid at given row and column
+     * @throws NoSuchElementException If there is no button at the given row and column
+     */
+    private Button getButtonFromButtonsGrid (int row, int column)
+    {
+        for (Node node : buttonsGrid.getChildren())
+            if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column)
+                return (Button) node;
+
+        throw new NoSuchElementException("The button marked was not found");
     }
 
     public void redoChange (ActionEvent actionEvent)

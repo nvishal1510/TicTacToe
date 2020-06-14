@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.model;
 
 public enum Player
 {

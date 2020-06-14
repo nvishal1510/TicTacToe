@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.model;
 
 import java.util.Stack;
 
@@ -28,7 +28,7 @@ public class Move
         this(Player.NONE, row, column);
     }
 
-    public static int getPlayedMoveStackSize ()
+    static int getPlayedMoveStackSize ()
     {
         return playedMoveStack.size();
     }
@@ -36,21 +36,39 @@ public class Move
     /**
      * Clear all the records of moves played with Move.java
      */
-    public static void clear ()
+    static void clear ()
     {
         playedMoveStack.clear();
     }
 
+    /**
+     * Undos last move, i.e removes its last played move record
+     *
+     * @return last played move
+     */
+    static Move undoLastMove ()
+    {
+        return playedMoveStack.pop();
+    }
+
+    /**
+     * @return row at which Move is placed
+     */
     public int getRow ()
     {
         return row;
     }
-
+    /**
+     * @return column at which Move is placed
+     */
     public int getColumn ()
     {
         return column;
     }
 
+    /**
+     * @return Player who played the move
+     */
     public Player getPlayer ()
     {
         return player;
