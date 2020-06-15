@@ -49,6 +49,7 @@ public class Grid
         if (getGridElement(row, column).getPlayer() != Player.NONE)
             return false;
         setGridElement(row, column, player);
+        Move.addMoveToPlayedMoveStack(getGridElement(row, column));
         Move.clearUndoneMoveStack();
         return true;
     }
@@ -137,6 +138,7 @@ public class Grid
     {
         Move redoneMove = Move.redoMove();
         setGridElement(redoneMove.getRow(), redoneMove.getColumn(), redoneMove.getPlayer());
+        Move.addMoveToPlayedMoveStack(redoneMove);
         return redoneMove;
     }
 

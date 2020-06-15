@@ -22,8 +22,6 @@ public class Move
         this.player = player;
         this.row = row;
         this.column = column;
-        if (player != Player.NONE)
-            playedMoveStack.push(this);
     }
 
     public Move (int row, int column)
@@ -31,9 +29,9 @@ public class Move
         this(Player.NONE, row, column);
     }
 
-    static int getPlayedMoveStackSize ()
+    static void addMoveToPlayedMoveStack (Move move)
     {
-        return playedMoveStack.size();
+        playedMoveStack.push(move);
     }
 
     /**
