@@ -162,7 +162,8 @@ public class Controller
             Move lastMove = grid.undoMove();
             swapPlayerPlaying();
             markBox(getButtonFromButtonsGrid(lastMove.getRow(), lastMove.getColumn()), Player.NONE);
-        } catch (UnsupportedOperationException e)
+        }
+        catch (UnsupportedOperationException e)
         {
             showNotification(2, e.getMessage());
         }
@@ -179,7 +180,12 @@ public class Controller
             Move redoneMove = grid.redoMove();
             swapPlayerPlaying();
             markBox(getButtonFromButtonsGrid(redoneMove.getRow(), redoneMove.getColumn()), redoneMove.getPlayer());
-        } catch (UnsupportedOperationException e)
+            if (grid.checkWin() != Player.NONE)
+                showNotification(2, String.format("Congratulations %s you have won!", grid.checkWin()));
+            else if (grid.isFull())
+                showNotification(2, "The game ended in a draw!");
+        }
+        catch (UnsupportedOperationException e)
         {
             showNotification(2, e.getMessage());
         }
